@@ -17,9 +17,13 @@ int main()
     while (true) {
         if(gpio_get(PIR) == 1){
             gpio_put(RED, 1);
+            sleep_ms(10);
+
         }else{
             gpio_put(RED, 0);
+            sleep_ms(10);
+
         }
-        sleep_ms(1000);
+        sleep_ms(10);
     }
 }
