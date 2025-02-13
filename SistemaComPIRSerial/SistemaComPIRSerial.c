@@ -11,8 +11,8 @@ int cont = 0;
 #define BUZZER1_PIN 10  // Pino do primeiro buzzer
 #define BUZZER2_PIN 21  // Pino do segundo buzzer
 #define NOTE_C5 523     // Frequência da nota C5 em Hz
-#define WIFI_SSID "kaillane"  // Substitua pelo nome da sua rede Wi-Fi
-#define WIFI_PASS "20240712" // Substitua pela senha da sua rede Wi-Fi
+#define WIFI_SSID "Nome"  // Substitua pelo nome da sua rede Wi-Fi
+#define WIFI_PASS "Senha" // Substitua pela senha da sua rede Wi-Fi
 
 // Estado dos botões (inicialmente sem mensagens)
 char PIR_stats[50] = "Nenhum evento";
