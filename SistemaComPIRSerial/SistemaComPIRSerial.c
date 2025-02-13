@@ -11,12 +11,11 @@ int cont = 0;
 #define BUZZER1_PIN 10  // Pino do primeiro buzzer
 #define BUZZER2_PIN 21  // Pino do segundo buzzer
 #define NOTE_C5 523     // Frequência da nota C5 em Hz
-#define WIFI_SSID "Nome"  // Substitua pelo nome da sua rede Wi-Fi
-#define WIFI_PASS "Senha" // Substitua pela senha da sua rede Wi-Fi
+#define WIFI_SSID "Galaxy A31C2EC"  // Substitua pelo nome da sua rede Wi-Fi
+#define WIFI_PASS "zipi2425" // Substitua pela senha da sua rede Wi-Fi
 
-// Estado dos botões (inicialmente sem mensagens)
-char PIR_stats[50] = "Nenhum evento";
-//char button2_message[50] = "Nenhum evento no botão 2";
+// Estado do sensor (inicialmente sem mensagens)
+char PIR_stats[50] = "TUDO NORMAL!";
 
 // Buffer para resposta HTTP
 char http_response[1024];
@@ -29,12 +28,10 @@ void create_http_response() {
              "<html>"
              "<head>"
              "  <meta charset=\"UTF-8\">"
-             "  <title>Controle do LED e Botões</title>"
+             "  <title>Sistema de Segurança - EmbarcaTech</title>"
              "</head>"
              "<body>"
-             "  <h1>Controle do LED e Botões</h1>"
-             "  <p><a href=\"/led/on\">Ligar LED</a></p>"
-             "  <p><a href=\"/led/off\">Desligar LED</a></p>"
+             "  <h1>Controle</h1>"
              "  <p><a href=\"/update\">Atualizar Estado</a></p>"
              "  <h2>Estado do Sensor:</h2>"
              "  <p>Status: %s</p>"
@@ -42,9 +39,6 @@ void create_http_response() {
              "</html>\r\n",
              PIR_stats);
 }
-
-
-
 
 // Função de callback para processar requisições HTTP
 static err_t http_callback(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err) {
@@ -161,7 +155,6 @@ int main()
 
     printf("Wi-Fi conectado!\n");
 
-    //printf("Botões configurados com pull-up nos pinos %d e %d\n", BUTTON1_PIN, BUTTON2_PIN);
 
     // Inicia o servidor HTTP
     start_http_server();
@@ -169,7 +162,6 @@ int main()
     while (true) {
         cyw43_arch_poll();  // Necessário para manter o Wi-Fi ativo
         if(gpio_get(PIR) == 1){
-              //printf("1");
               for (int i = 0; i < 10; i++) {
                   gpio_put(RED, 1);
                   play_note(BUZZER1_PIN, NOTE_C5);
@@ -183,7 +175,6 @@ int main()
                   
               }
         } else {
-            //printf("0");
             gpio_put(RED, 0);
             stop_buzzer(BUZZER1_PIN);
             stop_buzzer(BUZZER2_PIN);
